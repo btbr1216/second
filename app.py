@@ -45,6 +45,8 @@
 
 
 
+
+
 # list = []
 # number = input("input number: ")
 # number = int(number)
@@ -62,21 +64,61 @@
 
 
 
-# input1 = input("input first number")
-# input2 = input("input second number")
-# def findgcf(number1, number2):
-#     number = 1
-#     while True:
-#         if number % number1 == 0 and number % number2 == 0:
-#             print("GCF is", number)
-#             break
-#         number += 1
-# findgcf(int(input1), int(input2))
+
+input1 = input("input first number")
+input2 = input("input second number")
+def findgcf(number1, number2):
+    number = 0
+    if number1 > number2:
+        number = number2
+    else:
+        number = number1
+    while True:
+        if number1 % number == 0 and number2 % number == 0:
+            print("GCF is", number)
+            break
+        number -= 1
+findgcf(int(input1), int(input2))
 
 
 
-import random
-number = random.randint(1, 10)
-guess = input("Guess the number!")
-if int(guess) == number:
-    print("WINNER!")
+# #whiteboard test prep
+
+# def spaces(N, Y, T):
+#     amt = 0
+#     for i in range(N):
+#         if Y[i] == T[i] and Y[i] == "C":
+#             amt += 1
+#     print(amt)
+# spaces(5, ["C", ".", ".", "C", "C"], ["C", "C", "C", ".", "C"])
+
+
+
+
+
+# # number guessing game
+
+# import random
+# wrong = []
+# number = random.randint(1, 10)
+# while True:
+#     guess = input("Guess the number!")
+#     guess = int(guess)
+
+#     def printwrong(table):
+#         print("Already chosen numbers:")
+#         for i in table:
+#             print(i)
+
+#     if int(guess) == number:
+#         print("WINNER!")
+#         printwrong(wrong)
+#         break
+#     else:
+#         print("Wrong.")
+#         if guess > number:
+#             print("your guess is greater than the selected number")
+#         else:
+#             print("your guess is smaller than the selected number")
+#         wrong.append(guess)
+#     printwrong(wrong)
