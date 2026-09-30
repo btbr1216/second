@@ -65,20 +65,27 @@
 
 
 
-input1 = input("input first number")
-input2 = input("input second number")
-def findgcf(number1, number2):
-    number = 0
-    if number1 > number2:
-        number = number2
-    else:
-        number = number1
-    while True:
-        if number1 % number == 0 and number2 % number == 0:
-            print("GCF is", number)
-            break
-        number -= 1
-findgcf(int(input1), int(input2))
+
+
+
+#finding greatest common factor of two numbers
+
+# input1 = input("input first number")
+# input2 = input("input second number")
+# def findgcf(number1, number2):
+#     number = 0
+#     if number1 > number2:
+#         number = number2
+#     else:
+#         number = number1
+#     while True:
+#         if number1 % number == 0 and number2 % number == 0:
+#             print("GCF is", number)
+#             break
+#         number -= 1
+# findgcf(int(input1), int(input2))
+
+
 
 
 
@@ -99,7 +106,7 @@ findgcf(int(input1), int(input2))
 # # number guessing game
 
 # import random
-# wrong = []
+# guess_history = []
 # number = random.randint(1, 10)
 # while True:
 #     guess = input("Guess the number!")
@@ -112,13 +119,72 @@ findgcf(int(input1), int(input2))
 
 #     if int(guess) == number:
 #         print("WINNER!")
-#         printwrong(wrong)
+#         printwrong(guess_history)
 #         break
 #     else:
-#         print("Wrong.")
+#         if not guess in guess_history:
+#             print("Wrong.")
+#             guess_history.append(guess)
+#         else:
+#             print("That was an already guessed number")
 #         if guess > number:
 #             print("your guess is greater than the selected number")
 #         else:
 #             print("your guess is smaller than the selected number")
-#         wrong.append(guess)
-#     printwrong(wrong)
+#     printwrong(guess_history)
+
+
+
+
+
+
+items = [
+    {
+        "Name": "Couch",
+        "Price": "499.99",
+        "Description": "The comfiest couch you will ever sit on."
+    },
+
+    {
+        "Name": "Chair",
+        "Price": "49.99",
+        "Description": "The perfect chair for your home."
+    },
+
+    {
+        "Name": "Iphone 18 pro max",
+        "Price": "1298.99",
+        "Description": "500 new features from the last Iphone. And better camera quality."
+    },
+
+    {
+        "Name": "Medieval Sword Prop",
+        "Price": "35.99",
+        "Description": "Doubles as furniture for your home, you don't have to be making a movie to buy this."
+    }
+]
+
+#
+
+first = True
+didnt_understand = False
+while True:
+    print("List of items:")
+    for i, v in enumerate(items):
+        print(i+1, ")", v["Name"])
+    answer = 0
+    if first:
+        first = False
+        answer = input("Would you like to purchase an item? If so, please say which one.")
+    elif didnt_understand:
+        didnt_understand = False
+        answer = input("Could you repeat that?")
+    else:
+        answer = input("Would you like to purchase another item? If so, please say which one.")
+    item = False
+    for i, v in enumerate(items):
+        if v["Name"] == answer:
+            item = v
+    if not item:
+        didnt_understand = True
+        continue
