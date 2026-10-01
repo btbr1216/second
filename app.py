@@ -135,56 +135,106 @@
 
 
 
-
+# Answers:
+# The name of an item CAPS SENSITIVE
+# "yes"
+# "no"
+# "show me my cart"
 
 
 items = [
     {
         "Name": "Couch",
-        "Price": "499.99",
+        "Price": 499.99,
         "Description": "The comfiest couch you will ever sit on."
     },
 
     {
         "Name": "Chair",
-        "Price": "49.99",
+        "Price": 49.99,
         "Description": "The perfect chair for your home."
     },
 
     {
         "Name": "Iphone 18 pro max",
-        "Price": "1298.99",
+        "Price": 1298.99,
         "Description": "500 new features from the last Iphone. And better camera quality."
     },
 
     {
         "Name": "Medieval Sword Prop",
-        "Price": "35.99",
+        "Price": 35.99,
         "Description": "Doubles as furniture for your home, you don't have to be making a movie to buy this."
     }
 ]
 
-#
+cart = [
+
+]
 
 first = True
 didnt_understand = False
 while True:
+
     print("List of items:")
     for i, v in enumerate(items):
         print(i+1, ")", v["Name"])
+
+    didnt_understandchanged = False
+
     answer = 0
-    if first:
-        first = False
-        answer = input("Would you like to purchase an item? If so, please say which one.")
-    elif didnt_understand:
+    if didnt_understand:
         didnt_understand = False
+        didnt_understandchanged = True
         answer = input("Could you repeat that?")
+    elif first:
+        answer = input("Would you like to purchase an item? If so, please say which one.")
     else:
         answer = input("Would you like to purchase another item? If so, please say which one.")
+
+    if answer.lower() == "show me my cart":
+        if len(cart) == 0:
+            print("You have nothing in your cart.")
+            continue
+        
+        for i, v in enumerate(cart):
+            print(i+1, ")", v["Name"])
+        continue
+
     item = False
     for i, v in enumerate(items):
         if v["Name"] == answer:
             item = v
+
     if not item:
-        didnt_understand = True
-        continue
+        if answer.lower() == "no": # purchase
+
+            if didnt_understandchanged:
+                finalanswer = input("Do you want to leave?")
+                if finalanswer.lower() != "yes":
+                    continue
+
+            if len(cart) == 0: # nothing in cart
+                print("Okay, goodbye!")
+                break
+            
+            total = 0
+            print("Okay, here are the items you bought and the total.")
+            for i, v in enumerate(cart):
+                print(i+1, ")", v["Name"])
+                total += v["Price"]
+            print("Total:", total)
+            break
+
+        else: # something else said
+            didnt_understand = True
+            continue
+    else: # item was said
+        price = str(item["Price"])
+        print(item["Name"] + ":", item["Description"], "$" + price)
+        finalanswer = input("Are you sure you want to purchase this?")
+        if finalanswer.lower() == "yes":
+            print("The item has been added to your cart!")
+            first = False
+            cart.append(item)
+            
